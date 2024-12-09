@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>番茄鐘</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- <script src="https://apis.google.com/js/api.js"></script> -->
+    <link href="bootstrap.min.css" rel="stylesheet" />
+    <script src="jquery-3.5.1.slim.min.js"></script>
+    <script src="bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <div id="fireworksContainer" class="fireworks-container"></div>
+    <div class="container">
+        <!-- 左側：按鈕 -->
+        <div class="left-panel">
+            <div class="container" style="margin-top:20px;">
+                <!--折疊效果組件-->
+                <div id="accordion">
+                    <!--卡片-->
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h5 class="mb-0"><img src="tomatoIcon1.png" width="60px">
+                                <label data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                                    aria-controls="collapseOne">
+                                    番茄鐘計時器
+                                </label>
+                            </h5>
+                        </div>
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="buttons">
+                                    <button id="start-button" class="btn btn-warning btn-lg">開始</button>
+                                    <button id="reset-button" class="btn btn-danger btn-lg">重置</button>
+                                </div>
+                                <div class="break-buttons">
+                                    <button id="break-5-button" class="btn btn-info btn-lg">休息5分鐘</button>
+                                    <button id="break-15-button" class="btn btn-info btn-lg">休息15分鐘</button>
+                                </div>
+                                <hr>
+                                <div class="custom-timer">
+                                    <h5>自訂時間</h5>
+                                    <hr>
+                                    <input class="form-control" type="number" id="custom-minutes" min="1"
+                                        placeholder="輸入分鐘">
+                                    <button id="custom-start-button" class="btn btn-warning btn-sm">開始</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!--卡片-->
+                        <div class="card">
+                            <div class="card-header" id="headingTwo">
+                                <h5 class="mb-0"><img src="tomatoIcon1.png" width="60px">
+                                    <label data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+                                        aria-controls="collapseTwo">
+                                        待辦事項
+                                    </label>
+                                </h5>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="todo-input">
+                                        <input class="form-control" type="text" id="todo-task" placeholder="輸入任務...">
+                                        <button id="add-task-button" class="btn btn-warning">新增任務</button>
+                                    </div>
+                                    <hr>
+                                    <ul id="task-list"></ul>
+                                </div>
+                                <div class="stats">
+                                    <p style="text-align: center;">完成番茄數量：<span id="pomodoro-count">0</span><img
+                                            src="tomatoIcon1.png" width="40px"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--卡片-->
+                        <div class="card">
+                            <div class="card-header" id="headingThree">
+                                <h5 class="mb-0"><img src="tomatoIcon1.png" width="60px">
+                                    <label data-toggle="collapse" data-target="#collapseThree" aria-expanded="true"
+                                        aria-controls="collapseThree">
+                                        進階設定
+                                    </label>
+                                </h5>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                                data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="theme-sound-new">
+                                        <h5>主題選擇</h5>
+                                        <select class="form-control" id="theme-selector">
+                                            <option value="light">亮色模式</option>
+                                            <option value="dark">深色模式</option>
+                                            <option value="nature">自然風格</option>
+                                        </select>
+                                        <hr>
+                                        <h5>背景聲音</h5>
+                                        <select class="form-control" id="sound-selector">
+                                            <option value="none">靜音</option>
+                                            <option value="white-noise">白噪音</option>
+                                            <option value="birdsong">鳥鳴聲</option>
+                                            <option value="white-noise-birdsong">白噪音+鳥鳴聲</option>
+                                            <option value="bell">鈴聲</option>
+                                            <option value="water">流水聲</option>
+                                            <option value="mountainsguqin">古琴</option>
+                                        </select>
+                                        <hr>
+                                        <audio id="background-audio" loop></audio>
+                                        <p id="points-display" style="display: none;">積分：0</p>
+                                        <button id="health-reminder-button" class="btn btn-success btn-lg">健康提醒</button>
+
+                                        <button id="sync-calendar-button" class="btn btn-danger btn-lg"
+                                            style="display: none;">同步到日曆</button>
+                                        <hr>
+                                        <div class="quote-buttons">
+                                            <!-- <button id="random-quote-button" class="btn btn-warning btn-lg"
+                                                data-bs-toggle="tooltip" title="每按一次會隨機出現佳句">勵志佳句</button> -->
+
+                                            <!-- 開啟互動視窗的按鈕 -->
+                                            <button id="random-quote-button" class="btn btn-warning btn-lg"
+                                                data-bs-toggle="tooltip" title="每按一次會隨機出現佳句" data-toggle="modal"
+                                                data-target="#myModal2">
+                                                勵志佳句
+                                            </button>
+                                            <!-- 互動視窗 -->
+                                            <div class="modal fade" id="myModal2">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <!-- 互動視窗頁首 -->
+                                                        <div class="modal-header"
+                                                            style="background-color: darkslateblue;">
+                                                            <!-- <h1 class="modal-title">勵志佳句</h1> -->
+                                                            <img src="tomatoIcon1.png" width="60px">
+                                                            <h1>勵志佳句</h1>
+                                                            <button type="button" class="close"
+                                                                data-dismiss="modal">×</button>
+                                                        </div>
+                                                        <!-- 互動視窗主體 -->
+                                                        <div class="modal-body">
+                                                            <div id="quote-display"
+                                                                style="margin-top: 20px; font-size: 26px; color: #333; background-color: lightyellow;">
+                                                            </div>
+                                                        </div>
+                                                        <!-- 互動視窗頁尾 -->
+                                                        <div class="modal-footer" style="background-color:chocolate ">
+                                                            <button type="button" class="btn btn-success btn-lg"
+                                                                data-dismiss="modal">結束</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <button id="manage-quote-button" class="btn btn-danger btn-lg"
+                                                data-bs-toggle="tooltip"
+                                                title="維護後記得按下 F5 重新載入，勵志佳句按鈕才會載入最新的佳句">維護佳句</button>
+                                        </div>
+                                        <!-- <div id="quote-display"
+                                            style="margin-top: 20px; font-size: 18px; color: #333; background-color: lightyellow;">
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右側：計時器 -->
+        <div class="background">
+            <div class="overlay">
+                <!-- <h1>番茄鐘</h1> -->
+                <div class="timer">
+                    <div class="progress-container">
+                        <svg width="500" height="500" class="progress-ring">
+                            <circle class="progress-ring__circle" cx="265" cy="250" r="220" fill="none" stroke="tomato"
+                                stroke-width="10" stroke-linecap="round" />
+                        </svg>
+                        <div id="timer-display" class="timer-display">25:00</div>
+                        <audio id="timer-audio" src="reminder.mp3" preload="auto"></audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<script src="https://apis.google.com/js/api.js"></script>-->
+    <script src="todolist.js"></script>
+    <script src="extrafunction.js"></script>
+    <script src="popup.js"></script>
+    <script src="famous_quotes.js"></script>
+</body>
+
+</html>

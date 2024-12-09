@@ -1,0 +1,24 @@
+{
+    "manifest_version": 3,
+    "name": "番茄鐘",
+    "version": "1.0",
+    "description": "支持全螢幕的番茄鐘應用程式，除了基本的番茄鐘功能，還新增待辦事項、勵志片語、背景與背景音樂的選項；其中勵志片語還可以新增與維護",
+    "permissions": [
+        "storage",
+        "alarms"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "action": {        
+        "default_icon": "tomatoIcon2.png",
+        "default_width": 1024,
+        "default_height": 768
+    },
+    "web_accessible_resources": [
+    {
+        "resources": ["famous_quotes.json","reminder.mp3","wind-bell.mp3","white-noise.mp3","raining.mp3","mountainsguqin.mp3","birdsongFavor.mp3","birdsong.mp3"],        
+        "matches": ["<all_urls>"]
+    }
+]
+}

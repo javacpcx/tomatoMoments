@@ -1,0 +1,92 @@
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>維護名言佳句</title>
+
+    <!-- <script src="https://apis.google.com/js/api.js"></script> -->
+    <link href="bootstrap.min.css" rel="stylesheet" />
+    <script src="jquery-3.5.1.slim.min.js"></script>
+    <script src="bootstrap.bundle.min.js"></script>
+</head>
+<style>
+    #add-quote-form {
+        background-color: dodgerblue;
+        /* 淡灰色背景 */
+        border: 1px solid lightblue;
+        /* 淡灰色邊框 */
+        border-radius: 8px;
+        /* 圓角 */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        /* 添加陰影 */
+    }
+</style>
+
+<body>
+    <!-- 導覽列 -->
+    <nav class="navbar navbar-expand-sm bg-info navbar-dark">
+        <div class="container-fluid">
+            <img src="tomatoIcon1.png" width="80px">
+            <a class="navbar-brand" href="#">名言佳句管理</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <button id="save-json-button" class="btn btn-success" data-bs-toggle="tooltip"
+                            title="自行定義佳句後儲存，下載名言佳句為 JSON 文件">儲存名言佳句</button>
+                    </li>
+                    <li class="nav-item">
+                        <input type="file" id="load-json-button" class="btn btn-info" accept=".json"
+                            data-bs-toggle="tooltip" title="載入名言佳句的 JSON 文件">
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 表格顯示名言佳句 -->
+    <div class="container-fluid mt-4">
+        <!-- 新增名言表單 -->
+        <form id="add-quote-form" class="mt-4 p-3 rounded shadow">
+            <div class="row">
+                <!-- 名言欄位 -->
+                <div class="col-md-8">
+                    <input id="new-quote" class="form-control" placeholder="輸入名言" required>
+                </div>
+                <!-- 作者欄位 -->
+                <div class="col-md-2">
+                    <input type="text" id="new-author" class="form-control" placeholder="輸入作者" required>
+                </div>
+                <!-- 新增按鈕 -->
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-warning w-50">新增名言</button>
+                </div>
+            </div>
+        </form>
+
+
+        <h2 class="text-center mb-4">名言佳句清單</h2>
+        <table class="table table-bordered table-striped" id="quote-table">
+            <thead>
+                <tr>
+                    <th>名言</th>
+                    <th>作者</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="quote-list">
+                <!-- 這裡將由 JavaScript 動態填充 -->
+            </tbody>
+        </table>
+
+
+    </div>
+
+    <script src="manage_quotes.js"></script>
+</body>
+
+</html>
